@@ -13,10 +13,12 @@ spec:
       {{- include "match-fixture-k8.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        checksum/env: {{ toYaml .Values.env | sha256sum }}
+        timestamp: {{ now | quote }}
+        {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- end }}
       labels:
         {{- include "match-fixture-k8.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
