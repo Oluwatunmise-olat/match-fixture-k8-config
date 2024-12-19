@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: { { include "match-fixture-k8.fullname" . } }
-  labels: { { - include "match-fixture-k8.labels" . | nindent 4 } }
+  name: {{ include "match-fixture-k8.fullname" . }}
+  labels: {{  include "match-fixture-k8.labels" . | nindent 4 }}
 spec:
-  type: { { .Values.service.type } }
+  type: {{ .Values.service.type }}
   ports:
     - port: 3009
-      targetPort: { { .Values.service.port } }
+      targetPort: {{ .Values.service.port }}
       protocol: TCP
       name: http
-  selector: { { - include "match-fixture-k8.selectorLabels" . | nindent 4 } }
+  selector: {{  include "match-fixture-k8.selectorLabels" . | nindent 4 }}
