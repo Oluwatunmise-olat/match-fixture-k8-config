@@ -10,9 +10,9 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
 
 image:
-  repository: nginx
+  repository: oluwatunmiseolat/match_fixture
   pullPolicy: Always
-  tag: ""
+  tag: latest
 
 service:
   type: LoadBalancer
