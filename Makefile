@@ -17,3 +17,6 @@ template:
 	
 lint:
 	helm lint .
+
+package:
+	helm package .
