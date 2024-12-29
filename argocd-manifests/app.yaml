@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helm-app
+  namespace: argocd
+spec:
+  project: helm-project
+  source:
+    chart: "match-fixture-k8"
+    repoURL: "registry-1.docker.io/oluwatunmiseolat"
+    targetRevision: 0.1.0
+    helm:
+      releaseName: "match-fixture"
+      values: |
+        env:
+         - name: NODE_ENV
+           value: ""
+         - name: APP_KEY
+           value: ""
+         - name: MONGO_URI
+           value: ""
+         - name: APP_VERSION
+           value: ""
+         - name: REDIS_URL
+           value: ""
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true

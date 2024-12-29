@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: helm-project
+  namespace: argocd
+spec:
+  description: "Helm Chart Project Example"
+
+  sourceRepos:
+    - "registry-1.docker.io/oluwatunmiseolat"
+
+  destinations:
+    - namespace: default
+      server: https://kubernetes.default.svc
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
